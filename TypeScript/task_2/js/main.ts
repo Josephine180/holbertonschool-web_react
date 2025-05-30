@@ -1,66 +1,23 @@
-interface DirectorInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workDirectorTasks(): string;
-}
+/// <reference path="./crud.d.ts" /> 
 
-interface TeacherInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workTeacherTasks(): string;
-}
+import { RowID, RowElement } from './interface';
+import * as CRUD from './crud.js';
 
-class Director implements DirectorInterface {
-  workFromHome(): string {
-    return "Working from home"
-  };
-  getCoffeeBreak(): string {
-    return "Getting a coffee break"
-  };
-  workDirectorTasks(): string {
-    return "Getting to director tasks"
-};
+const row: RowElement = {
+  firstName: 'Guillaume',
+  lastName: 'Salva'
 };
 
-class Teacher implements TeacherInterface {
 
-  workFromHome(): string {
-    return "Cannot work from home"
-  };
-  getCoffeeBreak(): string {
-    return "Cannot have a break"
-  };
-  workTeacherTasks(): string {
-    return "Getting to work"
-  };
+const newRowID: RowID = CRUD.insertRow(row);
+
+
+const updatedRow: RowElement = {
+  firstName: 'Guillaume',
+  lastName: 'Salva',
+  age: 23
 };
 
-function createEmployee(salary: number | string) {
-  if (typeof salary == "number" && salary < 500) {
-    return new Teacher();
-  } else {
-    return new Director();
-  };
-};
 
-function isDirector(employee: Teacher | Director): employee is Director {
-  return (employee as Director).workDirectorTasks !== undefined;
-}
-
-function executeWork(employee: Teacher | Director): string {
-  if (isDirector(employee)) {
-    return employee.workDirectorTasks();
-  } else {
-    return employee.workTeacherTasks();
-  }
-}
-
-type Subjects = 'Math' | 'History';
-
-function teachClass(todayClass: Subjects): string {
-  if (todayClass === 'Math') {
-    return 'Teaching Math';
-  } else {
-    return 'Teaching History';
-  }
-}
+CRUD.updateRow(newRowID, updatedRow);
+CRUD.deleteRow(newRowID);
