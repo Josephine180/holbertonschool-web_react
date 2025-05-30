@@ -40,3 +40,26 @@ const printTeacher: printTeacherFunction = (firstName: string, lastName: string)
 };
 
 console.log(printTeacher('John', 'Doe'));
+
+class StudentClass{
+  public firstName: string;
+  public lastName: string;
+
+
+constructor(firstName: string, lastName: string) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+};
+
+workOnHomework(): string  {
+  return "Currently working"
+};
+
+displayName(): string {
+  return this.firstName;
+}
+};
+
+const student1 = new StudentClass("COCO", "DEV");
+
+console.log(student1.displayName());
